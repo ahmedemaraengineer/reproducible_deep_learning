@@ -17,3 +17,4 @@ model:
 
 trainer:
   max_epochs: 10
+

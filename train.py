@@ -14,6 +14,9 @@ import hydra
 from hydra.utils import get_original_cwd
 from omegaconf import DictConfig
 
+import logging
+logger = logging.getLogger(__name__) # Log anything that you want to see at any part of the code
+
 # The Dataset Class
 class ESC50Dataset(torch.utils.data.Dataset):
     def __init__(self, path: Path = Path('data/ESC-50'), 
@@ -109,6 +112,8 @@ class AudioNet(pl.LightningModule):
 
 @hydra.main(config_path='configs', config_name='default')
 def train(cfg: DictConfig):
+
+    logger.info(cfg)
 
     # We use folds 1,2,3 for training, 4 for validation, 5 for testing.
     path = Path(get_original_cwd()) / Path(cfg.data.path)
